@@ -91,7 +91,7 @@ formulario.addEventListener("submit", async function(event){
         );
 
         // ingresar al portal de facturas
-        window.location.href = "misFacturas.html";
+        window.location.href = "misfacturas.html";
 
     }catch(error){
 
