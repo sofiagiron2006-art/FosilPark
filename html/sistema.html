@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Panel Administrativo-FósilPark</title>
+        <link rel="stylesheet" href="../css/estilos.css">
+    </head>
+    <body>
+        <header class="encabezado-admin">
+            <div class="logo">
+                 <img src="../imagenes/logodino.png" alt="logodino">
+                <span>FÓSILPARK</span>
+            </div>
+            <div class="admin-info">
+                <span>Administrador</span>
+                <button type="button" id="btnCerrarSesion">Cerrar Sesión</button>
+            </div>
+            
+        </header>
+        <main class="panel-admin">
+            <section class="bienvenida-admin">
+                <h1>Panel administrativo</h1>
+                <p>Bienvenido al sistema de gestión de estacionamiento FósilPark</p>
+            </section>
+            <section class="resumen-admin">
+                <div class="tarjeta-admin">
+                    <h3>Clientes registrados</h3>
+                    <p id="totalClientes">0</p>
+                </div>
+                <div class="tarjeta-admin">
+                    <h3>Espacios disponibles</h3>
+                    <p id="espaciosDisponibles">0</p>
+                </div>
+                <div class="tarjeta-admin">
+                    <h3>Vehiculos estacionados</h3>
+                    <p id="vehiculosEstacionados">0</p>
+                </div>
+                <div class="tarjeta-admin">
+                    <h3>Movimientos del día</h3>
+                    <p id="totalMovimientos">0</p>
+                </div>
+            </section>
+            <section class="opciones-admin">
+                <h2>Gestion del estacionamiento</h2>
+                <div class="opciones-grid">
+                    <a href="#clientes" class="opcion-admin">
+                        <h3>Clientes</h3>
+                        <p>Consultar y administrar clientes registrados</p>
+                    </a>
+                    <a href="#estacionamiento" class="opcion-admin">
+                        <h3>Vehículos</h3>
+                        <p>Gestionar entradas y salidas de vehículos</p>
+                    </a>
+                    <a href="#tarifas" class="opcion-admin">
+                        <h3>Tarifas</h3>
+                        <p>Consultar las tarifas del estacionamiento</p>
+                    </a>
+                    <a href="#historial" class="opcion-admin">
+                        <h3>Facturación</h3>
+                        <p>Consultar facturas</p>
+                    </a>
+                </div>
+            </section>
+            <section class="tabla-admin" id="clientes">
+                <h2>Clientes registrados</h2>
+                <p>En esta sección aparecerán los clientes almacenados en la base de datos</p>
+                <div class="tabla-contenedor">
+                    <!--buscador de clientes por nombre-->
+                        <div class="buscador">
+                            <input type="text" id="buscarCliente" placeholder="Buscar cliente" >
+                        </div>
+                    <!--Tabla de clientes-->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>DPI</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Placa</th>
+                                <th>Vehículo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody id="tablaClientes">
+                            <tr>
+                                <td colspan="7">
+                                    Todavia no hay datos que mostrar
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!--control de estacionamiento-->
+            <section id="estacionamiento">
+                <h2>Control de estacionamiento</h2>
+                <!-- Formulario para registrar entrada -->
+                <div class="formulario-estacionamiento">
+                    <h3>Registrar entrada de vehiculo</h3>
+                    <label for="buscarPlaca">Placa del vehículo:</label>
+                    <input type="text" id="buscarPlaca" placeholder="Ingrese la placa del vehiculo">
+                    <button type="button" id="btnBuscarPlaca">Buscar vehiculo</button>
+                    <!--informacion del cliente encontrada-->
+                    <div id="datosVehiculo"></div>
+                    <button type="button" id="btnRegistrarEntrada" disabled>
+                    Registrar entrada
+                    </button>
+                    <p id="mensajeEstacionamiento"></p>
+                </div>
+                <!--tabla de vehiculos estacionados-->
+                <div class="vehiculos-estacionados">
+                    <h3>Vehiculos actualmente estacionados</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Placa</th>
+                                <th>Vehículo</th>
+                                <th>Entrada</th>
+                                <th>Espacio</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaEstacionamiento">
+                            <tr>
+                                <td colspan="6">no hay vehiculos estacionados</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- historial de facturas -->
+           <section id="historial">
+                <h2>Historial de facturas</h2>
+
+                <div class="tabla-historial">
+                    <table>
+                         <thead>
+                            <tr>
+                            <th>No. Factura</th>
+                            <th>Cliente</th>
+                            <th>Placa</th>
+                            <th>Fecha de salida</th>
+                         
+                            <th>Total pagado</th>
+                            <th>Acción</th>
+                            </tr>
+                        </thead>
+
+                           <tbody id="tablaHistorial">
+                           <tr>
+                         <td colspan="6">No hay facturas registradas</td>
+                         </tr>
+                           </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        <!--botones para la celda acciones-->
+        <template id="planillaAcciones"> <!--template es una sola planilla que se repetira para todos los clientes-->
+            <button class="btn-modificar" type="button">Modificar</button>
+            <button class="btn-eliminar" type="button">Eliminar</button>
+        </template>
+        <!--pie de pagina-->
+        <footer>
+            <p>5a Avenida y 12 Calle, Zona4</p>
+            <p>2026 FósilPark. Derechos reservados</p>
+        </footer>
+        <!--cargar de Dexie trabajar con IndexedDB-->
+        <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+        <!--basededatos con conexion de tu base de datos-->
+        <script src="../js/basededatos.js"></script> 
+        <script src="../js/sistema.js"></script>
+    </body>
+</html>

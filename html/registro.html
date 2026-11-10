@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro de Clientes-AutoControl</title>
+        <!--conectar archivo css-->
+        <link rel="stylesheet" href="../css/estilos.css">
+    </head>
+    <body>
+        <!--encabezado-->
+        <header>
+            <div class="logo">
+                <img src="../imagenes/logodino.png" alt="logodino">
+                <span>FÓSILPARK</span>
+            </div> 
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="index.html#servicios">Servicios</a>
+                <a href="index.html#tarifas">Tarifas</a>
+            </nav>
+        </header>
+        <!--formulario-->
+        <section class="registro">
+            <div class="formulario-contenedor">
+                <h1>Registro de clientes</h1>
+                <p class="texto-registro">
+                    Ingresa tus datos personales y los de tu vehiculo
+                    para utilizar nuestros servicios
+                </p>
+                <form id="registroForm">
+                    <!--datos-->
+                    <h2>Datos Personales</h2>
+                    <div class="campo">
+                        <label for="nombre">Nombre completo:</label>
+                        <!--input permitira ingrese informacion de texto-->
+                        <input type="text" id="nombre"
+                               placeholder="Ingrese tu nombre completo" required>
+                        <!--"id=nombre campo donde se aguardara en javascript-->
+                        <!--required es una condicion obligatoria para llenar el campo-->
+                    </div>
+                    <div class="campo">
+                        <label for="dpi">Numero de DPI:</label>
+                        <input type="text" id="dpi"
+                               placeholder="Ingrese tu DPI"
+                               maxlength="13"
+                               pattern="[0-9]{13}" 
+                               title="El DPI debe contener 13 digitos" required>
+                        <!--el pattern obliga a que se cumpla el numero estimado de cifra para DPI-->
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="telefono">Numero de telefono:</label>
+                        <input type="tel" id="telefono"
+                               placeholder="ejemplo:55667788" required>
+                    </div>
+                        
+                    <div class="campo">
+                        <label for="correo">Correo Electronico:</label>
+                        <input type="email" id="correo" placeholder="ejemplo@correo.com" required>
+                    </div>
+                    <!--datos de acceso a la cuenta-->
+                        <h2>Datos de acceso</h2>
+
+                         <div class="campo">
+                           <label for="contrasena">Crear contraseña:</label>
+                                <input type="password"
+                                      id="contrasena"
+                                       placeholder="Crea una contraseña"
+                                        minlength="8"
+                                     autocomplete="new-password"
+                                         required>
+                      </div>
+
+                      <div class="campo">
+                           <label for="confirmarContrasena">Confirmar contraseña:</label>
+                          <input type="password"
+                              id="confirmarContrasena"
+                               placeholder="Repite tu contraseña"
+                                   minlength="8"
+                                    autocomplete="new-password"
+                                           required>
+                      </div>
+                    <!--datos del vehiculo-->
+                    <h2>Datos del Vehiculo</h2>
+                    <div class="campo">
+                        <label for="placa">Numero de placa:</label>
+                        <input type="text" id="placa" placeholder="ejemplo: P456SQL" required>
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="tipovehiculo">Tipo de vehiculo:</label>
+                        <!--lista desplegable-->
+                        <select id="tipovehiculo" required>
+                            <option value="">Selecciona tu vehiculo</option>
+                            <option value="Motocicleta">Motocicleta</option>
+                            <option value="Automovil">Automovil</option> 
+                            <option value="Camioneta">Camioneta</option>
+                        </select><!--eleccion del cliente-->
+                    </div>
+                    <!--botones-->
+                    <div class="botones-registro">
+                        <button type="button" class="boton" id="btnRegistrar">
+                            Registrar cliente
+                        </button>
+                        <!--boton de limpieza-->
+                        <button type="reset" class="boton-limpiar">
+                            Limpiar Formulario
+                        </button>
+                    </div>
+                    
+                </form>
+                <p id="mensajeRegistro"></p>
+                <div id="resumenCliente"></div>
+                
+                <a href="index.html" class="volver">
+                    Volver al inicio
+                </a>
+            </div>
+        </section>
+        <!--pie de pagina-->
+        <footer>
+            <p>5a Avenida y 12 Calle, Zona4</p>
+            <p>2026 FósilPark. Derechos reservados</p>
+        </footer>
+        <!--biblioteca dexie.js-->
+        <script src="https://cdn.jsdelivr.net/npm/dexie@3.2.7/dist/dexie.min.js"></script>
+        <!--nuestra base de datos enlazada-->
+        <script src="../js/basededatos.js"></script>
+        <!--funciones del formulario registro-->
+        <script src="../js/registro.js"></script>
+    
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso de clientes - FósilPark</title>
+
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="../imagenes/logodino.png" alt="Logo FósilPark">
+            <span>FÓSILPARK</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="registro.html">Registrarse</a>
+        </nav>
+    </header>
+
+    <section class="registro">
+        <div class="formulario-contenedor">
+
+            <h1>Iniciar sesión</h1>
+
+            <p class="texto-registro">
+                Ingresa a tu cuenta para consultar tus facturas de estacionamiento.
+            </p>
+
+            <form id="loginClienteForm">
+
+                <div class="campo">
+                    <label for="correoCliente">Correo:</label>
+                    <input type="email"
+                           id="correoCliente"
+                           placeholder="Ingresa tu correo electrónico"
+                           required>
+                </div>
+
+                <div class="campo">
+                    <label for="contrasenaCliente">Contraseña:</label>
+                    <input type="password"
+                           id="contrasenaCliente"
+                           placeholder="Ingresa tu contraseña"
+                           required>
+                </div>
+
+                <div class="botones-registro">
+                    <button type="submit" class="boton">
+                        Iniciar sesión
+                    </button>
+                </div>
+
+            </form>
+
+            <p id="mensajeLoginCliente"></p>
+
+            <p>
+                ¿Aún no tienes cuenta?
+                <a href="registro.html">Regístrate aquí</a>
+            </p>
+
+            <a href="index.html" class="volver">
+                Volver al inicio
+            </a>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>5a Avenida y 12 Calle, Zona 4</p>
+        <p>2026 FósilPark. Derechos reservados</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/dexie@3.2.7/dist/dexie.min.js"></script>
+    <script src="../js/basededatos.js"></script>
+    <script src="../js/loginCliente.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura - FósilPark</title>
+    <!-- estilos del proyecto -->
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <main class="contenedor-factura">
+        <section class="factura">
+            <!-- encabezado -->
+            <header class="encabezado-factura">
+                <h1>FósilPark</h1>
+                <h2>Factura de estacionamiento</h2>
+                <p>Comprobante de servicio</p>
+            </header>
+            <!-- numero de factura -->
+            <div class="numero-factura">
+                <p>Factura No.:</p>
+                <span id="numeroFactura">---</span>
+            </div>
+            <!-- datos del cliente -->
+            <section class="datos-factura">
+                <h3>Datos del cliente</h3>
+                <p>Nombre: <span id="nombreCliente"></span></p>
+                <p>DPI: <span id="dpiCliente"></span></p>
+            </section>
+            <!-- datos del vehiculo -->
+            <section class="datos-factura">
+                <h3>Datos del vehículo</h3>
+                <p>Placa: <span id="placaVehiculo"></span></p>
+                <p>Tipo: <span id="tipoVehiculo"></span></p>
+            </section>
+            <!-- informacion del estacionamiento -->
+            <section class="datos-factura">
+                <h3>Detalle del estacionamiento</h3>
+                <p>Fecha de entrada: <span id="fechaEntrada"></span></p>
+                <p>Fecha de salida: <span id="fechaSalida"></span></p>
+                
+                <p>Tarifa por hora: <span id="tarifaHora"></span></p>
+            </section>
+            <!-- total -->
+            <div class="total-factura">
+                <h2>Total a pagar</h2>
+                <p id="totalCobro">Q0.00</p>
+            </div>
+            <footer class="pie-factura">
+                <p>¡Gracias por utilizar FósilPark!</p>
+            </footer>
+            <!-- boton imprimir -->
+            <button type="button" id="btnImprimir">
+                Imprimir factura
+            </button>
+            <a href="sistema.html">Volver al sistema</a>
+        </section>
+    </main>
+    <!-- conexion con IndexedDB -->
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="../js/basededatos.js"></script>
+    <script src="../js/factura.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro Administrador-FósilPark</title>
+        <link rel="stylesheet"  href="../css/estilos.css">
+    
+    </head>
+    <body>
+        <!--encabezado-->
+        <header>
+            <div class="logo">
+                <img src="../imagenes/logodino.png" alt="logodino">
+                <span>FÓSILPARK</span>
+            </div>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="registro.html">Registrarse</a>
+            </nav>
+        </header>
+        <!--datos que llenara el administrador-->
+        <section class="login">
+            <div class="login-contenedor">
+                <h1>Acceso administrativo</h1>
+                <p>
+                    Ingrese credenciales para ingresar al sistema de estacionamiento
+                </p>
+                <form id="loginForm">
+                    <div class="campo">
+                        <label for="usuario">Usuario:</label>
+                        <input type="text" id="usuario" placeholder="Ingresa tu Usuario" required>
+                    </div>
+                    <div class="campo">
+                        <label for="contraseña">Contraseña:</label>
+                        <input type="password" id="contraseña" placeholder="Ingresar contraseña" required>
+                    </div>
+                    <button type="submit" class="boton-login">Iniciar Sesión</button>
+                </form>
+                <div id="mensajelogin"></div>
+                <a href="index.html" class="volver">Volver al inicio</a>
+            </div>
+        </section>
+        <!--pie de pagina-->
+        <footer>
+            <p>5a Avenida y 12 Calle, Zona4</p>
+            <p>2026 FósilPark. Derechos reservados</p>
+        </footer>
+        <script src="../js/login.js"></script>
+    </body>
+</html>
