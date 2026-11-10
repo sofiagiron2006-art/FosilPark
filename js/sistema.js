@@ -8,7 +8,26 @@ if (sessionStorage.getItem("adminAutenticado")!=="true"){
     //si no inicio sesion regresa al login
     window.location.href="../html/login.html";
 }
+// REPARAR MOVIMIENTOS SIN CLIENTE
+async function repararMovimientosHuerfanos(){
+    try{
+        const movimientos = await db.movimientos
+            .where("estado")
+            .equals("Estacionado")
+            .toArray();
 
+        for(const movimiento of movimientos){
+            const cliente = await db.clientes.get(movimiento.clienteId);
+
+            if(!cliente){
+                await db.movimientos.delete(movimiento.id);
+                console.log("Movimiento sin cliente eliminado:", movimiento.id);
+            }
+        }
+    }catch(error){
+        console.error("Error al reparar movimientos:", error);
+    }
+}
 //capturar el boton de cerrar sesión
 const btnCerrarSesion=document.getElementById("btnCerrarSesion");
 //cerrar la sesion administrativa
@@ -143,31 +162,58 @@ buscarCliente.addEventListener("input", function(){
 });
 //ELIMINAR CLIENTES
 const tablaClientes=document.getElementById("tablaClientes");
+
 tablaClientes.addEventListener("click", async function(event){
+
     //identificar si se presiono el boton eliminar
     const botonEliminar=event.target.closest(".btn-eliminar");
+
     //si no se presiono el boton termina
     if(!botonEliminar){
         return;
     }
+
     //identificar la fila del cliente
     const fila=botonEliminar.closest("tr");
+
     //obtener el ID del cliente
     const id=Number(fila.dataset.id);
-    //confirmar la eliminacion mensaje
-    const confirmar=confirm("¿Estas seguro de eliminar este cliente?");
-    if(!confirmar){
-        return;
-    }
+
     try{
-        //eliminar cliente de IndexedDB
+
+        // comprobar si el cliente tiene movimientos registrados
+        const movimientosCliente = await db.movimientos
+            .where("clienteId")
+            .equals(id)
+            .toArray();
+
+        // impedir eliminar clientes con movimientos o facturas
+        if(movimientosCliente.length > 0){
+            alert("No se puede eliminar este cliente porque tiene movimientos o facturas registrados.");
+            return;
+        }
+
+        // confirmar la eliminacion
+        const confirmar = confirm("¿Estas seguro de eliminar este cliente?");
+
+        if(!confirmar){
+            return;
+        }
+
+        // eliminar cliente de IndexedDB
         await db.clientes.delete(id);
-        //actualizar la tabla
+
+        // actualizar la tabla y los contadores
         await consultarClientes();
+        await actualizarContadores();
+
         alert("Cliente eliminado correctamente");
+
     }catch(error){
+
         console.error("Error al eliminar el cliente:", error);
         alert("No se pudo eliminar el cliente");
+
     }
 });
 //MODIFICAR CLIENTES
@@ -231,7 +277,7 @@ tablaClientes.addEventListener("click", async function(event){
     }
 });
 //ejecucion
-consultarClientes();
+
 
 //BUSCAR VEHICULOS POR PLACA 
 
@@ -408,7 +454,7 @@ async function consultarVehiculosEstacionados(){
     }
 }
 
-consultarVehiculosEstacionados();
+
 
 //REGISTRAR SALIDA DE VEHICULO
 //capturar la tabla de estacionamiento
@@ -596,7 +642,7 @@ async function consultarHistorialFacturas(){
 }
 
 // ejecutar consulta
-consultarHistorialFacturas();
+
 // ACTUALIZAR LOS CONTADORES DEL PANEL
 async function actualizarContadores(){
     try{
@@ -658,5 +704,16 @@ async function actualizarContadores(){
 }
 
 // EJECUTAR AL CARGAR EL SISTEMA
-actualizarContadores();
+// INICIAR EL SISTEMA
+async function iniciarSistema(){
+
+    await repararMovimientosHuerfanos();
+
+    await consultarClientes();
+    await consultarVehiculosEstacionados();
+    await consultarHistorialFacturas();
+    await actualizarContadores();
+}
+
+iniciarSistema();
 
